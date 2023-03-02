@@ -5,7 +5,7 @@
 // @description  shows current rank for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
-// @updateURL    https://github.com/QuCla/resi-rank-navleiste/raw/master/current-rank.user.js
+// @updateURL    https://github.com/QuCla/resi-chat-askforhelp/raw/main/resi-askforhelp.user.js
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==
