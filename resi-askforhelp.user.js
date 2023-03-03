@@ -16,8 +16,11 @@ var missionID = 123456789
 // Abfrage ob Verbandsmitglied
 // De & En
 // Variabler Anfragetext
-// Link nicht in neuem Tab?
+// Link verstecken
+// Link nicht in neuem Tab? anhängen von etwas an die chatnachricht, vermutlich schwierig, unmöglich
 // readme ausfüllen
+// nach benutzung Button deaktivieren
+
 
 
 function CallHelpBuild() {
