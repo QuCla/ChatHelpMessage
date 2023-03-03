@@ -1,6 +1,6 @@
 # Ask Association for Help
 
-- (EN) - [englisch Version of Readme](https://github.com/QuCla/resi-rank-navleiste/blob/master/README_EN.md)
+- (EN) - [englisch Version of Readme](https://github.com/QuCla/resi-chat-askforhelp/blob/main/README_EN.md)
 - (DE) - Diese Skript fügt einen Button im Alarmierungsfenster hinzu, welcher einen Text im Verbandschat postet.
 
 Das Skript funktioniert für die Webseite [@Rettungssimulator](https://github.cim/Rettungssimulator).
