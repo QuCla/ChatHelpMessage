@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi- Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @description  shows current rank for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -11,7 +11,6 @@
 // ==/UserScript==
 'use strict';
 
-var missionID = 123456789
 var userLang = navigator.language;
 var langObj;
 
@@ -22,8 +21,7 @@ const deText = {
     cancel  : 'Ne doch nicht',
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Bitte den Verband im Chat um Hilfe.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
-                Hilfe rufen! </button>`,
-    CallAsk : 'Ich benötige eure Hilfe! '
+                Hilfe rufen! </button>`
 }
 
 const enText = {
@@ -33,8 +31,7 @@ const enText = {
     cancel  : 'No',
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Ask your association for support.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
-                Call Help! </button>`,
-    CallAsk : 'I need your assistance! '
+                Call Help! </button>`
 }
 
 
@@ -67,26 +64,40 @@ else{
     }
 
 if(location.pathname.includes('mission/') & associationMember() == 1){
-    missionID = +$('.detail-title').attr('usermissionid')
+    var missionID = +$('.detail-title').attr('missionid');
+    var UserMissionID = +$('.detail-title').attr('usermissionid');
+
     CallHelpBuild();;
 
     $(document).on('click', '#callHelp_alert', () => {
         //Abfrage über modal
         modal(langObj.title, langObj.text, langObj.confirm, langObj.cancel, function CallHelp () {
-            // Aufbau der Nachricht
-            var ChatMessage = langObj.CallAsk + 'https://rettungssimulator.online/mission/' + missionID
 
             $.ajax({
-                url: "/api/sendAssociationChatMessage",
+                url: "/api/shareMission",
                 dataType: "json",
                 type : "POST",
                 data: {
-                    "message": ChatMessage
+                    "userMissionID": UserMissionID
                 },
                 success : function(r) {
                     console.log(r);
                 }
             });
+
+            $.ajax({
+                url: "/api/sendCustomMissionLog",
+                dataType: "json",
+                type : "POST",
+                data: {
+                    'message': 'Bitte unterstütze mich',
+                    "userMissionID": UserMissionID
+                },
+                success : function(r) {
+                    console.log(r);
+                }
+            });
+
         });
         //Deaktivieren nach Benutzung
         $('#callHelp_alert').addClass('button-disabled')
