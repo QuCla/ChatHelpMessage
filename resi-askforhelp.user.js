@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ReSi- Hilfeanfrage Chat
+// @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
 // @version      1.0.1
 // @description  shows current rank for rettungssimulator.online
