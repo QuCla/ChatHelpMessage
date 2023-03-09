@@ -1,7 +1,7 @@
-# Ask Association for Help
+# Ask Your Association for Help
 
 - (EN) - [englisch Version of Readme](https://github.com/QuCla/resi-chat-askforhelp/blob/main/README_EN.md)
-- (DE) - Diese Skript fügt einen Button im Alarmierungsfenster hinzu, welcher einen Text im Verbandschat postet.
+- (DE) - Fügt Button hinzu, zur Freigabe des Einsatzes und Senden im Einsatzlog.
 
 Das Skript funktioniert für die Webseite [@Rettungssimulator](https://github.cim/Rettungssimulator).
 
@@ -10,7 +10,7 @@ Installation einfach hier: [`askforhelp.user.js`](https://github.com/QuCla/resi-
 Alle meine Skripte: [Repository](https://github.com/QuCla?tab=repositories)
 
 
-## Supported Browsers
+## Unterstützte Browser
 
 Bei diesen Browser klappt das Skript:
 
@@ -33,5 +33,7 @@ Bei diesen Browser klappt das Skript:
 ## In Arbeit
 
 - [x] Übersetzung
-- [ ] Text für den Chat editierbar
+- [x] Eigener Alarmtext
+- [ ] Zähler für Anzahl offener Einsatzlogs
+- [ ] Push bei neuem Einsatzlog
 

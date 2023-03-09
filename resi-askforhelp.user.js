@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
-// @description  shows current rank for rettungssimulator.online
+// @version      1.1.0
+// @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
 // @updateURL    https://github.com/QuCla/resi-chat-askforhelp/raw/main/resi-askforhelp.user.js
@@ -16,19 +16,21 @@ var langObj;
 
 const deText = {
     title   : 'Verbandshilfe anfordern',
-    text    : 'Möchtest du den Verband um Hilfe bitten?',
-    confirm : 'Ja',
-    cancel  : 'Ne doch nicht',
+    label   : 'Dein Hilferuf:',
+    placeholder : 'Bitte unterstütze mich!',
+    confirmText : 'Absenden',
+    cancelText : 'Abbruch',
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Bitte den Verband im Chat um Hilfe.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Hilfe rufen! </button>`
 }
 
 const enText = {
-    title   : 'Request association help',
-    text    : 'Do you really want to ask for help?',
-    confirm : 'Yes',
-    cancel  : 'No',
+    title   : 'Request association support',
+    label   : 'Your request text:',
+    placeholder : 'Please help me!',
+    confirmText : 'Submit',
+    cancelText : 'Cancel',
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Ask your association for support.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Call Help! </button>`
@@ -38,7 +40,8 @@ const enText = {
 function CallHelpBuild() {
     $('.button-group.fixed-footer')
         .prepend(langObj.Button);}
-                
+
+
 function associationMember() {
     var answer = 3;
     var VTest = '';
@@ -48,31 +51,44 @@ function associationMember() {
         type : "GET",
         success : function(r) {
             VTest = r.status;
-            }
-        })
+        }
+    })
     if (VTest != 'error'){
         answer = 1;
-    return answer;
+        return answer;
     }
 }
 
 if(userLang.match('de')){
     langObj = deText;
-    }
+}
 else{
     langObj = enText;
-    }
+}
 
 if(location.pathname.includes('mission/') & associationMember() == 1){
     var missionID = +$('.detail-title').attr('missionid');
     var UserMissionID = +$('.detail-title').attr('usermissionid');
 
-    CallHelpBuild();;
+    CallHelpBuild();
 
     $(document).on('click', '#callHelp_alert', () => {
         //Abfrage über modal
-        modal(langObj.title, langObj.text, langObj.confirm, langObj.cancel, function CallHelp () {
+        async function iModal(){
+            var title = langObj.title;
+            var label = langObj.label;
+            var placeholder = langObj.placeholder;
+            var confirmText = langObj.confirmText;
+            var cancelText = langObj.cancelText;
 
+            let PostMessage = await inputModal({title, label, placeholder, confirmText, cancelText});
+            //Bei Abbruch wird die Funktion nicht weiter ausgeführt, Mission wird nicht freigegeben
+
+            if (PostMessage == ''){
+                PostMessage = 'Bitte unterstütze mich!'
+            }
+
+            //Mission im Verband teilen
             $.ajax({
                 url: "/api/shareMission",
                 dataType: "json",
@@ -84,22 +100,29 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
                     console.log(r);
                 }
             });
-
+            
+            //Senden der Nachricht im einsatzloh
             $.ajax({
                 url: "/api/sendCustomMissionLog",
                 dataType: "json",
                 type : "POST",
                 data: {
-                    'message': 'Bitte unterstütze mich',
+                    'message': PostMessage,
                     "userMissionID": UserMissionID
                 },
                 success : function(r) {
                     console.log(r);
                 }
-            });
+            });          
 
-        });
-        //Deaktivieren nach Benutzung
-        $('#callHelp_alert').addClass('button-disabled')
+            //Deaktivieren nach Benutzung
+            $('#callHelp_alert').addClass('button-disabled')
+        }
+        //Aufrufen der Modalfunktion
+        iModal();
     });
 };
+
+
+
+

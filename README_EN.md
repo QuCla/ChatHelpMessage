@@ -1,6 +1,6 @@
 # Ask for help
 
-- (EN) - Adds button to ask for help in association chat.
+- (EN) - Adds button to ask for help in mission log.
 
 The script is working for [@Rettungssimulator](https://github.cim/Rettungssimulator).
 
@@ -31,4 +31,5 @@ These browser were tested with the script:
 ## Workload
 
 - [x] Translation
-- [ ] Be able to wrote your own request
+- [x] Be able to wrote your own request
+- [ ] Push Notifier
