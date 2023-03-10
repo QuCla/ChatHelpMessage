@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.2.1
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -12,9 +12,9 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_SandkastenVersion';
-var NewVersionNumber = '1.2';
+var NewVersionNumber = '1.2.1';
 var OldVersionNumber = '1.1';
-var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Es wurde diese Updatenachricht eingefügt. <br>Viel Spaß & schön dass du das Skript benutzt!';
+var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Es wurde diese Updatenachricht eingefügt. <br> <br>Viel Spaß & schön dass du das Skript benutzt!';
 // =====================================================
 var NewUserTitle = 'Du nutzt jetzt das "AskForHelp"!'
 var NewUserMessage = 'Es freut mich, dass du mein Skript benutzt. <br>Habe viel Spass damit!'
@@ -59,7 +59,7 @@ function VerHandling(){
             'title': NewUserTitle,
             'message': NewUserMessage,
             'type': 'info',
-            'timeout':4500
+            'timeout':5000
         });
     }
     
@@ -69,7 +69,7 @@ function VerHandling(){
             'title': `Update von ` + OldVersionNumber + ` auf ` + NewVersionNumber,
             'message': UpdateNachricht,
             'type': 'info',
-            'timeout':4500
+            'timeout':5000
         });
     }
     // Neue Version in local schreiben
