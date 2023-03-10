@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      1.2
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -10,6 +10,14 @@
 // @run-at       document-end
 // ==/UserScript==
 'use strict';
+// ====== Versionhandling und Updatenachricht ==========
+var Script_LocalStorageName = 'QuCla_SandkastenVersion';
+var NewVersionNumber = '1.2';
+var OldVersionNumber = '1.1';
+var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Es wurde diese Updatenachricht eingefügt. <br>Viel Spaß & schön dass du das Skript benutzt!';
+// =====================================================
+var NewUserTitle = 'Du nutzt jetzt das "AskForHelp"!'
+var NewUserMessage = 'Es freut mich, dass du mein Skript benutzt. <br>Habe viel Spass damit!'
 
 var userLang = navigator.language;
 var langObj;
@@ -39,8 +47,34 @@ const enText = {
 
 function CallHelpBuild() {
     $('.button-group.fixed-footer')
-        .prepend(langObj.Button);}
+        .prepend(langObj.Button);
+    }
 
+function VerHandling(){
+    OldVersionNumber = localStorage.getItem(Script_LocalStorageName);
+    
+    // Neuer User
+    if (OldVersionNumber == null){
+        systemMessage({
+            'title': NewUserTitle,
+            'message': NewUserMessage,
+            'type': 'info',
+            'timeout':4500
+        });
+    }
+    
+    // Update
+    if (NewVersionNumber != OldVersionNumber & OldVersionNumber != null){
+        systemMessage({
+            'title': `Update von ` + OldVersionNumber + ` auf ` + NewVersionNumber,
+            'message': UpdateNachricht,
+            'type': 'info',
+            'timeout':4500
+        });
+    }
+    // Neue Version in local schreiben
+    localStorage.setItem(Script_LocalStorageName, NewVersionNumber);
+}
 
 function associationMember() {
     var answer = 3;
@@ -65,6 +99,8 @@ if(userLang.match('de')){
 else{
     langObj = enText;
 }
+
+VerHandling();
 
 if(location.pathname.includes('mission/') & associationMember() == 1){
     var missionID = +$('.detail-title').attr('missionid');
