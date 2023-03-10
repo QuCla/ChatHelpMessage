@@ -121,7 +121,7 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
             //Bei Abbruch wird die Funktion nicht weiter ausgeführt, Mission wird nicht freigegeben
 
             if (PostMessage == ''){
-                PostMessage = 'Bitte unterstütze mich!'
+                PostMessage = placeholder;
             }
 
             //Mission im Verband teilen
@@ -137,7 +137,7 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
                 }
             });
             
-            //Senden der Nachricht im einsatzloh
+            //Senden der Nachricht im Einsatzlog
             $.ajax({
                 url: "/api/sendCustomMissionLog",
                 dataType: "json",
