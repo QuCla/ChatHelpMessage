@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      1.1.1
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -85,7 +85,7 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
             //Bei Abbruch wird die Funktion nicht weiter ausgeführt, Mission wird nicht freigegeben
 
             if (PostMessage == ''){
-                PostMessage = 'Bitte unterstütze mich!'
+                PostMessage = placeholder;
             }
 
             //Mission im Verband teilen
@@ -101,7 +101,7 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
                 }
             });
             
-            //Senden der Nachricht im einsatzloh
+            //Senden der Nachricht im Einsatzlog
             $.ajax({
                 url: "/api/sendCustomMissionLog",
                 dataType: "json",
