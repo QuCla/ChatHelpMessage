@@ -34,6 +34,6 @@ Bei diesen Browser klappt das Skript:
 
 - [x] Übersetzung
 - [x] Eigener Alarmtext
-- [ ] Zähler für Anzahl offener Einsatzlogs
+- [x] Zähler für Anzahl offener Einsatzlogs
 - [ ] Push bei neuem Einsatzlog
 

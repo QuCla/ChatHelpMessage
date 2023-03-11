@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.2.1
+// @version      1.3
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -12,12 +12,12 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_SandkastenVersion';
-var NewVersionNumber = '1.2.1';
+var NewVersionNumber = '1.3';
 var OldVersionNumber = '1.1';
-var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Es wurde diese Updatenachricht eingefügt. <br> <br>Viel Spaß & schön dass du das Skript benutzt!';
+var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Missioncounter des Einsatzlog <br> <br>Viel Spaß & schön dass du das Skript benutzt!';
 // =====================================================
-var NewUserTitle = 'Du nutzt jetzt das "AskForHelp"!'
-var NewUserMessage = 'Es freut mich, dass du mein Skript benutzt. <br>Habe viel Spass damit!'
+var NewUserTitle = 'Du nutzt jetzt das Skript "AskForHelp"!'
+var NewUserMessage = 'Es freut mich, dass du mein Skript benutzt. <br>Die Features sind: <br>- Button zum Hilferufen im Einsatzlog <br>- Anzeige offener Einsätze im Log<br>Habe viel Spass damit!'
 
 var userLang = navigator.language;
 var langObj;
@@ -93,6 +93,25 @@ function associationMember() {
     }
 }
 
+function CountMissionsLog(){
+    let MissionsLog = document.getElementById('association-missions-messages').childElementCount;
+    let MissionsLog2 = MissionsLog - 1;
+    return MissionsLog2
+}
+
+function BuildCounter(amount){
+    const Einsatzlog = document.querySelector('div[tab="missionLog"]');
+    Einsatzlog.insertAdjacentHTML('afterbegin','<span class="badge-container"><span class="badge ncOpenMissionsLog" style="color: #fff !important; background-color: red !important;"><span id="MissionLogCounter">' +
+                                  amount + '</span></span></span>');
+}
+
+function RewriteCount(){
+    let amount = CountMissionsLog();
+    let position = document.getElementById('MissionLogCounter');
+    position.innerHTML = amount;
+}
+
+
 if(userLang.match('de')){
     langObj = deText;
 }
@@ -100,8 +119,20 @@ else{
     langObj = enText;
 }
 
+//Nachricht über Versionsveränderung
 VerHandling();
+//Einbinden Anzeige offener Missionen im Einsatzlog
+BuildCounter(CountMissionsLog());
+//Regelmäßige Aktualisierung
+setInterval(RewriteCount, 60000);
 
+//Aktualisierung bei eingehender Mission
+socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
+    //Dieser Code wird ausgeführt sobald eine Mission im Einsatzlog pusht
+    RewriteCount();
+});
+
+//Einbinden Button zum Teilen inklusive Modal für eigene Nachricht
 if(location.pathname.includes('mission/') & associationMember() == 1){
     var missionID = +$('.detail-title').attr('missionid');
     var UserMissionID = +$('.detail-title').attr('usermissionid');
