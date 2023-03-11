@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.3.1
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -11,10 +11,10 @@
 // ==/UserScript==
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
-var Script_LocalStorageName = 'QuCla_SandkastenVersion';
-var NewVersionNumber = '1.3';
+var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
+var NewVersionNumber = '1.3.1';
 var OldVersionNumber = '1.1';
-var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Missioncounter des Einsatzlog <br> <br>Viel Spaß & schön dass du das Skript benutzt!';
+var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Missioncounter des Einsatzlog <br> <br>Viel Spaß & Danke, dass du das Skript benutzt!';
 // =====================================================
 var NewUserTitle = 'Du nutzt jetzt das Skript "AskForHelp"!'
 var NewUserMessage = 'Es freut mich, dass du mein Skript benutzt. <br>Die Features sind: <br>- Button zum Hilferufen im Einsatzlog <br>- Anzeige offener Einsätze im Log<br>Habe viel Spass damit!'
@@ -119,18 +119,6 @@ else{
     langObj = enText;
 }
 
-//Nachricht über Versionsveränderung
-VerHandling();
-//Einbinden Anzeige offener Missionen im Einsatzlog
-BuildCounter(CountMissionsLog());
-//Regelmäßige Aktualisierung
-setInterval(RewriteCount, 60000);
-
-//Aktualisierung bei eingehender Mission
-socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
-    //Dieser Code wird ausgeführt sobald eine Mission im Einsatzlog pusht
-    RewriteCount();
-});
 
 //Einbinden Button zum Teilen inklusive Modal für eigene Nachricht
 if(location.pathname.includes('mission/') & associationMember() == 1){
@@ -190,6 +178,15 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
     });
 };
 
+//Nachricht über Versionsveränderung
+VerHandling();
+//Einbinden Anzeige offener Missionen im Einsatzlog
+BuildCounter(CountMissionsLog());
+//Regelmäßige Aktualisierung
+setInterval(RewriteCount, 60000);
 
-
-
+//Aktualisierung bei eingehender Mission
+socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
+    //Dieser Code wird ausgeführt sobald eine Mission im Einsatzlog pusht
+    RewriteCount();
+});
