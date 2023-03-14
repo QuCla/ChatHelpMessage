@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.3.1
+// @version      1.3.2
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -12,12 +12,19 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
-var NewVersionNumber = '1.3.1';
+var NewVersionNumber = '1.3.2';
 var OldVersionNumber = '1.1';
-var UpdateNachricht = 'Das Skript AskForHelp hat ein Update erhalten <br> Das ist neu: <br> Missioncounter des Einsatzlog <br> <br>Viel Spaß & Danke, dass du das Skript benutzt!';
+var UpdateNachricht =   `Das Skript AskForHelp hat ein Update erhalten <br>
+                        Das ist neu: <br>
+                        Missioncounter des Einsatzlog<br> <br>
+                        Viel Spaß & Danke, dass du das Skript benutzt!`;
 // =====================================================
 var NewUserTitle = 'Du nutzt jetzt das Skript "AskForHelp"!'
-var NewUserMessage = 'Es freut mich, dass du mein Skript benutzt. <br>Die Features sind: <br>- Button zum Hilferufen im Einsatzlog <br>- Anzeige offener Einsätze im Log<br>Habe viel Spass damit!'
+var NewUserMessage =    `Es freut mich, dass du mein Skript benutzt. <br>
+                        Die Features sind: <br>
+                        - Button zum Hilferufen im Einsatzlog <br>
+                        - Anzeige offener Einsätze im Log<br> <br>
+                        Habe viel Spass damit!`;
 
 var userLang = navigator.language;
 var langObj;
@@ -28,6 +35,10 @@ const deText = {
     placeholder : 'Bitte unterstütze mich!',
     confirmText : 'Absenden',
     cancelText : 'Abbruch',
+    update : 'Update von ' + OldVersionNumber + ' auf ' + NewVersionNumber,
+    updatemsg : '',
+    newuser : 'Du nutzt jetzt das Skript "AskForHelp"!',
+    newusermsg : '',
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Bitte den Verband im Chat um Hilfe.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Hilfe rufen! </button>`
@@ -39,6 +50,10 @@ const enText = {
     placeholder : 'Please help me!',
     confirmText : 'Submit',
     cancelText : 'Cancel',
+    update : 'updated to ' + NewVersionNumber',
+    updatemsg : '',
+    newuser : 'You installed the script "AskForHelp"!',
+    newusermsg : '',
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Ask your association for support.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Call Help! </button>`
