@@ -1,4 +1,4 @@
-[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)  /github/manifest-json/v/:user/:repo
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)  ![Version](https://img.shields.io/github/package-json/v/qucla/resi-askforhelp/dev?style=flat-square&label=Version)
 
 # Ask Your Association for Help
 
