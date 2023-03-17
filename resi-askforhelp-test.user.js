@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pre ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.3.2
+// @version      08.15
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -39,7 +39,10 @@ const deText = {
     updatemsg : '',
     newuser : 'Du nutzt jetzt das Skript "AskForHelp"!',
     newusermsg : '',
-    Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Bitte den Verband im Chat um Hilfe.' id='callHelp_alert'>
+    Button  : ` <button type='button' 
+                class='button button-success button-round button-info' 
+                data-tooltip='Bitte den Verband im Chat um Hilfe.' 
+                id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Hilfe rufen! </button>`
 }
@@ -54,7 +57,10 @@ const enText = {
     updatemsg : '',
     newuser : 'You installed the script "AskForHelp"!',
     newusermsg : '',
-    Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Ask your association for support.' id='callHelp_alert'>
+    Button  : ` <button type='button' 
+                class='button button-success button-round button-info' 
+                data-tooltip='Ask your association for support.' 
+                id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Call Help! </button>`
 }
@@ -116,7 +122,8 @@ function CountMissionsLog(){
 
 function BuildCounter(amount){
     const Einsatzlog = document.querySelector('div[tab="missionLog"]');
-    Einsatzlog.insertAdjacentHTML('afterbegin','<span class="badge-container"><span class="badge ncOpenMissionsLog" style="color: #fff !important; background-color: red !important;"><span id="MissionLogCounter">' +
+    Einsatzlog.insertAdjacentHTML('afterbegin',
+                                  '<span class="badge-container"><span class="badge ncOpenMissionsLog" style="color: #fff !important; background-color: red !important;"><span id="MissionLogCounter">' +
                                   amount + '</span></span></span>');
 }
 
@@ -203,5 +210,12 @@ setInterval(RewriteCount, 60000);
 //Aktualisierung bei eingehender Mission
 socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
     //Dieser Code wird ausgeführt sobald eine Mission im Einsatzlog pusht
+    
+    // Test für Push
+    // https://www.w3schools.com/jsref/prop_style_background.asp
+    let span = document.getElementByClassName('badge ncOpenMissionsLog');
+    span.style.background = blue;  
     RewriteCount();
+    setTimeout(500)
+    span.style.background = red;
 });
