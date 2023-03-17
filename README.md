@@ -1,4 +1,4 @@
-[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com) ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp) ![Version](https://img.shields.io/badge/version-v1.3.2-orange)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)  ![GitHub package.json version](https://img.shields.io/github/package-json/v/qucla/resi-askforhelp) ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp)
 
 # Ask Your Association for Help
 
