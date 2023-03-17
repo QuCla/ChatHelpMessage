@@ -4,7 +4,7 @@
 
 # Ask for help
 
-- (EN) - Adds button to ask for help in mission log.
+- Adds button to ask for help in mission log.
 
 The script is working for [@Rettungssimulator](https://github.cim/Rettungssimulator).
 
