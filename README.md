@@ -1,3 +1,5 @@
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
+
 # Ask Your Association for Help
 
 - (EN) - [englisch Version of Readme](https://github.com/QuCla/resi-chat-askforhelp/blob/main/README_EN.md)
