@@ -24,7 +24,6 @@ Bei diesen Browser klappt das Skript:
 | Safari  | :grey_question:             |
 | Chrome  | :ballot_box_with_check:     |
 | Opera   | :grey_question:             |
-| IE      | :x:                         |
 | Edge    | :grey_question:             |
 | Firefox | :ballot_box_with_check:     |
 
