@@ -1,5 +1,5 @@
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
-![GitHub package.json version](https://img.shields.io/badge/version-v1.3.2-orange)
+![GitHub package.json version](https://img.shields.io/badge/version-v1.4-orange)
 ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp)
 
 # Ask Your Association for Help
@@ -38,5 +38,5 @@ Bei diesen Browser klappt das Skript:
 - [x] Übersetzung
 - [x] Eigener Alarmtext
 - [x] Zähler für Anzahl offener Einsatzlogs
-- [ ] Push bei neuem Einsatzlog
+- [x] Push bei neuem Einsatzlog
 

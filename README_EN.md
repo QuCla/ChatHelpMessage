@@ -1,5 +1,5 @@
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
-![GitHub package.json version](https://img.shields.io/badge/version-v1.3.2-orange)
+![GitHub package.json version](https://img.shields.io/badge/version-v1.4-orange)
 ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp)
 
 # Ask for help
@@ -35,4 +35,4 @@ These browser were tested with the script:
 
 - [x] Translation
 - [x] Be able to wrote your own request
-- [ ] Push Notifier
+- [x] Push Notifier

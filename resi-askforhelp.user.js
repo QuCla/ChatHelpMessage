@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.3.2
+// @version      1.4
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
+// @downloadURL  https://github.com/QuCla/resi-chat-askforhelp/raw/main/resi-askforhelp.user.js
 // @updateURL    https://github.com/QuCla/resi-chat-askforhelp/raw/main/resi-askforhelp.user.js
 // @grant        none
 // @run-at       document-end
@@ -12,17 +13,19 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
-var NewVersionNumber = '1.3.2';
-var OldVersionNumber = '1.1';
+var NewVersionNumber = '1.4';
+var OldVersionNumber = '1.3.2';
 var UpdateNachricht =   `Das Skript AskForHelp hat ein Update erhalten <br>
                         Das ist neu: <br>
-                        Missioncounter des Einsatzlog<br> <br>
+                        - optische Benachrichtigung bei neuem Einsatz<br>
+                        - Übersetzung des Skriptes ins Englische<br> <br>
                         Viel Spaß & Danke, dass du das Skript benutzt!`;
 // =====================================================
 var NewUserTitle = 'Du nutzt jetzt das Skript "AskForHelp"!'
 var NewUserMessage =    `Es freut mich, dass du mein Skript benutzt. <br>
                         Die Features sind: <br>
                         - Button zum Hilferufen im Einsatzlog <br>
+                        - Optisches Feedback bei Einsatzrelease <br> <br>
                         - Anzeige offener Einsätze im Log<br> <br>
                         Habe viel Spass damit!`;
 
@@ -36,9 +39,18 @@ const deText = {
     confirmText : 'Absenden',
     cancelText : 'Abbruch',
     update : 'Update von ' + OldVersionNumber + ' auf ' + NewVersionNumber,
-    updatemsg : '',
+    updatemsg : `Das Skript AskForHelp hat ein Update erhalten <br>
+                Das ist neu: <br>
+                - optische Benachrichtigung bei neuem Einsatz<br>
+                - Übersetzung des Skriptes ins Englische<br> <br>
+                Viel Spaß & Danke, dass du das Skript benutzt!`,
     newuser : 'Du nutzt jetzt das Skript "AskForHelp"!',
-    newusermsg : '',
+    newusermsg :`Es freut mich, dass du mein Skript benutzt. <br>
+                Die Features sind: <br>
+                - Button zum Hilferufen im Einsatzlog <br>
+                - Optisches Feedback bei Einsatzrelease <br> <br>
+                - Anzeige offener Einsätze im Log<br> <br>
+                Habe viel Spass damit!`,
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Bitte den Verband im Chat um Hilfe.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Hilfe rufen! </button>`
@@ -50,10 +62,18 @@ const enText = {
     placeholder : 'Please help me!',
     confirmText : 'Submit',
     cancelText : 'Cancel',
-    update : 'updated to ' + NewVersionNumber',
-    updatemsg : '',
+    update : 'updated to ' + NewVersionNumber,
+    updatemsg : `There was an update for "AskForHelp"! <br>
+                This is new: <br>
+                - optical feedback for released missions <br> 
+                - translation into english <br> <br>
+                Have fun!`,
     newuser : 'You installed the script "AskForHelp"!',
-    newusermsg : '',
+    newusermsg :    `This script contains this features: <br>
+        	        - button to call help within missions log <br>
+                    - optical feedback for released missions <br>
+                    - counter for open missions in missions log <br> <br>
+                    Have fun!`,
     Button  : `<button type='button' class='button button-success button-round button-info' data-tooltip='Ask your association for support.' id='callHelp_alert'>
                 <i class='fa-solid fa-phone-rotary'></i>
                 Call Help! </button>`
@@ -71,8 +91,8 @@ function VerHandling(){
     // Neuer User
     if (OldVersionNumber == null){
         systemMessage({
-            'title': NewUserTitle,
-            'message': NewUserMessage,
+            'title': langObj.newuser,
+            'message': langObj.newusermsg,
             'type': 'info',
             'timeout':5000
         });
@@ -81,8 +101,8 @@ function VerHandling(){
     // Update
     if (NewVersionNumber != OldVersionNumber & OldVersionNumber != null){
         systemMessage({
-            'title': `Update von ` + OldVersionNumber + ` auf ` + NewVersionNumber,
-            'message': UpdateNachricht,
+            'title': langObj.update,
+            'message': langObj.updatemsg,
             'type': 'info',
             'timeout':5000
         });
@@ -116,7 +136,7 @@ function CountMissionsLog(){
 
 function BuildCounter(amount){
     const Einsatzlog = document.querySelector('div[tab="missionLog"]');
-    Einsatzlog.insertAdjacentHTML('afterbegin','<span class="badge-container"><span class="badge ncOpenMissionsLog" style="color: #fff !important; background-color: red !important;"><span id="MissionLogCounter">' +
+    Einsatzlog.insertAdjacentHTML('afterbegin','<span class="badge-container"><span class="badge CounterMissionsLog" style="color: #fff !important; background-color: red !important;"><span id="MissionLogCounter">' +
                                   amount + '</span></span></span>');
 }
 
@@ -133,7 +153,6 @@ if(userLang.match('de')){
 else{
     langObj = enText;
 }
-
 
 //Einbinden Button zum Teilen inklusive Modal für eigene Nachricht
 if(location.pathname.includes('mission/') & associationMember() == 1){
@@ -170,7 +189,7 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
                     console.log(r);
                 }
             });
-            
+
             //Senden der Nachricht im Einsatzlog
             $.ajax({
                 url: "/api/sendCustomMissionLog",
@@ -183,7 +202,7 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
                 success : function(r) {
                     console.log(r);
                 }
-            });          
+            });
 
             //Deaktivieren nach Benutzung
             $('#callHelp_alert').addClass('button-disabled')
@@ -198,10 +217,15 @@ VerHandling();
 //Einbinden Anzeige offener Missionen im Einsatzlog
 BuildCounter(CountMissionsLog());
 //Regelmäßige Aktualisierung
-setInterval(RewriteCount, 60000);
+setInterval(RewriteCount, 30000);
 
 //Aktualisierung bei eingehender Mission
 socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
     //Dieser Code wird ausgeführt sobald eine Mission im Einsatzlog pusht
     RewriteCount();
+    let counter = document.getElementsByClassName('badge CounterMissionsLog')[0];
+    counter.style.backgroundColor = "blue";
+    setTimeout(function() {
+        counter.style.backgroundColor = "red";
+    }, 800);
 });
