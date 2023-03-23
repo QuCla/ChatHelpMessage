@@ -224,7 +224,8 @@ socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
     RewriteCount();
     let counter = document.getElementsByClassName('badge CounterMissionsLog')[0];
     counter.style.backgroundColor = "blue";
+    window.alert('changed to blue');
     setTimeout(function() {
         counter.style.backgroundColor = "red";
-    }, 800);
+    }, 2000); //sinnvolle Zeit finden
 });
