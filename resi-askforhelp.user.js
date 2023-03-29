@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.4.1
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -13,7 +13,7 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
-var NewVersionNumber = '1.4';
+var NewVersionNumber = '1.4.1';
 var OldVersionNumber = '1.3.2';
 var UpdateNachricht =   `Das Skript AskForHelp hat ein Update erhalten <br>
                         Das ist neu: <br>
@@ -227,5 +227,5 @@ socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
     counter.style.backgroundColor = "blue";
     setTimeout(function() {
         counter.style.backgroundColor = "red";
-    }, 800);
+    }, 3000);
 });
