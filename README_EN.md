@@ -3,7 +3,7 @@
 ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp)
 ![GitHub](https://img.shields.io/badge/status-testing-ff0000)
 
-# Ask for help
+# Ask Your Association for Help
 
 - Adds button to ask for help in mission log.
 
