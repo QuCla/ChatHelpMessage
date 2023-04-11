@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.4.2
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -98,7 +98,7 @@ function VerHandling(){
     }
     
     // Update
-    if (NewVersionNumber != OldVersionNumber & OldVersionNumber != null){
+    if (NewVersionNumber != OldVersionNumber && OldVersionNumber != null){
         systemMessage({
             'title': langObj.update,
             'message': langObj.updatemsg,
