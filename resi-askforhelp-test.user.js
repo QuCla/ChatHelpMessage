@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         ReSi - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.4.2
+// @version      1.5
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
-// @updateURL    https://github.com/QuCla/resi-chat-askforhelp/raw/main/resi-askforhelp.user.js
+// @updateURL    https://github.com/QuCla/resi-askforhelp/raw/main/resi-askforhelp-test.user.js
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==
@@ -159,6 +159,10 @@ if(location.pathname.includes('mission/') & associationMember() == 1){
     var UserMissionID = +$('.detail-title').attr('usermissionid');
 
     CallHelpBuild();
+    let shared = document.getElementsByClassName('button-group fixed-footer')[0];
+    if (shared.childElementCount == 3) {
+        $('#callHelp_alert').addClass('button-disabled')
+    }
 
     $(document).on('click', '#callHelp_alert', () => {
         //Abfrage über modal
