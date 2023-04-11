@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         ReSi - Hilfeanfrage Chat
+// @name         TEST - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.5.1
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -12,12 +12,12 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
-var NewVersionNumber = '1.4';
-var OldVersionNumber = '1.3.2';
+var NewVersionNumber = '1.5.1';
+var OldVersionNumber = '1.4';
 var UpdateNachricht =   `Das Skript AskForHelp hat ein Update erhalten <br>
                         Das ist neu: <br>
-                        - optische Benachrichtigung bei neuem Einsatz<br>
-                        - Übersetzung des Skriptes ins Englische<br> <br>
+                        - Umbenennung<br>
+                        - Fehlerbehebung <br> <br>
                         Viel Spaß & Danke, dass du das Skript benutzt!`;
 // =====================================================
 var NewUserTitle = 'Du nutzt jetzt das Skript "AskForHelp"!'
@@ -228,8 +228,7 @@ socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
     RewriteCount();
     let counter = document.getElementsByClassName('badge CounterMissionsLog')[0];
     counter.style.backgroundColor = "blue";
-    window.alert('changed to blue');
     setTimeout(function() {
         counter.style.backgroundColor = "red";
-    }, 2000); //sinnvolle Zeit finden
+    }, 4000); //sinnvolle Zeit finden
 });
