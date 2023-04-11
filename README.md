@@ -1,7 +1,7 @@
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
 ![GitHub package.json version](https://img.shields.io/badge/version-v1.4.2-orange)
 ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp)
-![GitHub](https://img.shields.io/badge/status-done-ff0000)
+![GitHub](https://img.shields.io/badge/status-testing-ff0000)
 
 # Ask Your Association for Help
 
