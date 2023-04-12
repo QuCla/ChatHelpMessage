@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TEST - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.5.1
+// @version      1.5.2
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -14,19 +14,6 @@
 var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
 var NewVersionNumber = '1.5.1';
 var OldVersionNumber = '1.4';
-var UpdateNachricht =   `Das Skript AskForHelp hat ein Update erhalten <br>
-                        Das ist neu: <br>
-                        - Umbenennung<br>
-                        - Fehlerbehebung <br> <br>
-                        Viel Spaß & Danke, dass du das Skript benutzt!`;
-// =====================================================
-var NewUserTitle = 'Du nutzt jetzt das Skript "AskForHelp"!'
-var NewUserMessage =    `Es freut mich, dass du mein Skript benutzt. <br>
-                        Die Features sind: <br>
-                        - Button zum Hilferufen im Einsatzlog <br>
-                        - Optisches Feedback bei Einsatzrelease <br> <br>
-                        - Anzeige offener Einsätze im Log<br> <br>
-                        Habe viel Spass damit!`;
 
 var userLang = navigator.language;
 var langObj;
@@ -40,8 +27,8 @@ const deText = {
     update : 'Update von ' + OldVersionNumber + ' auf ' + NewVersionNumber,
     updatemsg : `Das Skript AskForHelp hat ein Update erhalten <br>
                 Das ist neu: <br>
-                - optische Benachrichtigung bei neuem Einsatz<br>
-                - Übersetzung des Skriptes ins Englische<br> <br>
+                - Umbenennung interner Variabeln<br>
+                - Fehlerbehebung<br> <br>
                 Viel Spaß & Danke, dass du das Skript benutzt!`,
     newuser : 'Du nutzt jetzt das Skript "AskForHelp"!',
     newusermsg :`Es freut mich, dass du mein Skript benutzt. <br>
@@ -64,8 +51,8 @@ const enText = {
     update : 'updated to ' + NewVersionNumber,
     updatemsg : `There was an update for "AskForHelp"! <br>
                 This is new: <br>
-                - optical feedback for released missions <br> 
-                - translation into english <br> <br>
+                - renamed some intern variables <br> 
+                - patched some failures <br> <br>
                 Have fun!`,
     newuser : 'You installed the script "AskForHelp"!',
     newusermsg :    `This script contains this features: <br>
