@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         TEST - Hilfeanfrage Chat
+// @name         BETA - Hilfeanfrage Chat
 // @namespace    http://tampermonkey.net/
-// @version      1.5.2
+// @version      1.5.3
 // @description  script for rettungssimulator.online
 // @author       QuCla
 // @match        https://rettungssimulator.online/*
@@ -12,7 +12,7 @@
 'use strict';
 // ====== Versionhandling und Updatenachricht ==========
 var Script_LocalStorageName = 'QuCla_ReSi_AskForHelp';
-var NewVersionNumber = '1.5.1';
+var NewVersionNumber = '1.5.3';
 var OldVersionNumber = '1.4';
 
 var userLang = navigator.language;
@@ -28,7 +28,8 @@ const deText = {
     updatemsg : `Das Skript AskForHelp hat ein Update erhalten <br>
                 Das ist neu: <br>
                 - Umbenennung interner Variabeln<br>
-                - Fehlerbehebung<br> <br>
+                - Fehlerbehebung<br>
+                - Umbenennung <br> <br>
                 Viel Spaß & Danke, dass du das Skript benutzt!`,
     newuser : 'Du nutzt jetzt das Skript "AskForHelp"!',
     newusermsg :`Es freut mich, dass du mein Skript benutzt. <br>
@@ -52,7 +53,8 @@ const enText = {
     updatemsg : `There was an update for "AskForHelp"! <br>
                 This is new: <br>
                 - renamed some intern variables <br> 
-                - patched some failures <br> <br>
+                - patched some failures <br>
+                - renamed skript <br> <br>
                 Have fun!`,
     newuser : 'You installed the script "AskForHelp"!',
     newusermsg :    `This script contains this features: <br>
