@@ -81,8 +81,7 @@ function VerHandling(){
         systemMessage({
             'title': langObj.newuser,
             'message': langObj.newusermsg,
-            'type': 'info',
-            'timeout':5000
+            'type': 'info'
         });
     }
     
@@ -91,8 +90,7 @@ function VerHandling(){
         systemMessage({
             'title': langObj.update,
             'message': langObj.updatemsg,
-            'type': 'info',
-            'timeout':5000
+            'type': 'info'
         });
     }
     // Neue Version in local schreiben
@@ -219,5 +217,5 @@ socket.on("associationCustomMissionLog", (associationCustomMissionLogObject) =>{
     counter.style.backgroundColor = "blue";
     setTimeout(function() {
         counter.style.backgroundColor = "red";
-    }, 4000); //sinnvolle Zeit finden
+    }, 4000);
 });
