@@ -3,6 +3,10 @@
 ![GitHub](https://img.shields.io/github/license/qucla/resi-askforhelp)
 ![GitHub](https://img.shields.io/badge/status-done-ff0000)
 
+```diff
+-!! Das Script wird nicht weiter bedtreut bis zum Release des Reworks vom ReSi. !!
+```
+
 # Ask Your Association for Help
 
 - (EN) - [englisch Version of Readme](https://github.com/QuCla/resi-chat-askforhelp/blob/main/README_EN.md)
